@@ -115,6 +115,7 @@ export const RESUME_DATA = {
       techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Node.js"],
       category: "Workflow Platform",
       period: "Recent",
+      link: { href: "https://easyprocure.in/" },
     },
     {
       title: "MeetingHelper",
@@ -123,6 +124,7 @@ export const RESUME_DATA = {
       techStack: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
       category: "Productivity Tool",
       period: "Recent",
+      link: { href: "https://intervuecopilot.vercel.app/" },
     },
     {
       title: "aiHireMaster",
