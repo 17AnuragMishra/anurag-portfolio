@@ -117,15 +117,15 @@ export const RESUME_DATA = {
       period: "Recent",
       link: { href: "https://easyprocure.in/" },
     },
-    {
-      title: "MeetingHelper",
-      description:
-        "A meeting productivity tool built to organize agendas, capture notes, and turn conversations into clear follow-up actions and summaries.",
-      techStack: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
-      category: "Productivity Tool",
-      period: "Recent",
-      link: { href: "https://intervuecopilot.vercel.app/" },
-    },
+    // {
+    //   title: "MeetingHelper",
+    //   description:
+    //     "A meeting productivity tool built to organize agendas, capture notes, and turn conversations into clear follow-up actions and summaries.",
+    //   techStack: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
+    //   category: "Productivity Tool",
+    //   period: "Recent",
+    //   link: { href: "https://intervuecopilot.vercel.app/" },
+    // },
     {
       title: "aiHireMaster",
       description:
