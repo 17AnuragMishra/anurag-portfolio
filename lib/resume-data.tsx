@@ -91,6 +91,38 @@ export const RESUME_DATA = {
       ],
     },
   ],
+  openSource: [
+    {
+      organization: "Zulip",
+      link: "https://zulip.com/",
+      repo: "https://github.com/zulip/zulip",
+      badges: ["Open Source"],
+      title: "Merged 3 PRs, working on 2 ongoing issues.",
+      start: "2024",
+      end: "Present",
+      description: [
+        "Successfully merged 3 pull requests to the Zulip repository.",
+        "Currently working on 2 ongoing issues.",
+        "Website: zulip.com",
+        "Repo: github.com/zulip/zulip",
+      ],
+    },
+    {
+      organization: "typehero",
+      link: "https://typehero.dev",
+      repo: "https://github.com/typehero/typehero",
+      badges: ["Open Source"],
+      title: "Merged 1 PR, working on 2 ongoing issues.",
+      start: "2024",
+      end: "Present",
+      description: [
+        "Successfully merged 1 pull request to the typehero repository.",
+        "Currently working on 2 ongoing issues.",
+        "Website: typehero.dev",
+        "Repo: github.com/typehero/typehero",
+      ],
+    },
+  ],
   skills: [
     "React",
     "Next.js",

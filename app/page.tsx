@@ -80,7 +80,7 @@ export default function Page() {
               </div>
             </div>
 
-            <div className="grid min-w-[260px] gap-3 sm:grid-cols-3 lg:grid-cols-1">
+            <div className="grid min-w-[260px] gap-3 sm:grid-cols-2 lg:grid-cols-1">
               <QuickInfo
                 label="Experience"
                 value={`${RESUME_DATA.work.length} roles`}
@@ -90,6 +90,11 @@ export default function Page() {
                 label="Projects"
                 value={`${RESUME_DATA.projects.length}+ builds`}
                 detail="Recent work with UI, real-time, and AI products"
+              />
+              <QuickInfo
+                label="Open Source"
+                value={`${RESUME_DATA.openSource.length} repos`}
+                detail="Merged PRs and active contribution work"
               />
               <QuickInfo
                 label="Stack"
@@ -110,7 +115,7 @@ export default function Page() {
                 Real work, easy to scan
               </h2>
               <p className="max-w-2xl text-sm leading-7 text-[#6b7280]">
-                A quick look at the kind of products I’ve been building recently.
+                A quick look at the kind of products I&apos;ve been building recently.
               </p>
             </div>
 
@@ -247,6 +252,76 @@ export default function Page() {
             </div>
           </Section>
         </div>
+
+        <Section className="rounded-[2rem] border border-black/6 bg-white p-6 shadow-[0_18px_50px_rgba(15,23,42,0.05)] md:p-8">
+          <div className="space-y-2">
+            <p className="text-sm font-medium uppercase tracking-[0.16em] text-[#8a6840]">
+              Open Source Contributions
+            </p>
+            <h2 className="text-2xl font-semibold tracking-[-0.03em] text-[#111827] md:text-3xl">
+              Public work that backs the resume
+            </h2>
+            <p className="max-w-2xl text-sm leading-7 text-[#6b7280]">
+              Contributions where I&apos;ve merged pull requests and stayed involved
+              with ongoing issues.
+            </p>
+          </div>
+
+          <div className="space-y-4 pt-2">
+            {RESUME_DATA.openSource.map((item) => (
+              <Card
+                key={`${item.organization}-${item.repo}`}
+                className="rounded-2xl border border-black/6 bg-[#fcfbf9] p-5"
+              >
+                <div className="flex flex-wrap items-start justify-between gap-3">
+                  <div className="space-y-2">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <a
+                        href={item.link}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-lg font-semibold text-[#111827] hover:text-[#8a6840]"
+                      >
+                        {item.organization}
+                      </a>
+                      <a
+                        href={item.repo}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-sm font-medium text-[#8a6840] hover:underline"
+                      >
+                        [repo]
+                      </a>
+                      {item.badges.map((badge) => (
+                        <Badge
+                          key={badge}
+                          variant="secondary"
+                          className="rounded-full border border-black/8 bg-[#f3eee5] px-2.5 py-1 text-[11px] text-[#374151]"
+                        >
+                          {badge}
+                        </Badge>
+                      ))}
+                    </div>
+                    <p className="text-sm text-[#4b5563]">{item.title}</p>
+                  </div>
+
+                  <span className="text-sm text-[#6b7280]">
+                    {item.start} - {item.end}
+                  </span>
+                </div>
+
+                <ul className="mt-4 space-y-2 text-sm leading-6 text-[#4b5563]">
+                  {item.description.map((point) => (
+                    <li key={point} className="flex gap-3">
+                      <span className="mt-2 size-1.5 rounded-full bg-[#8a6840]" />
+                      <span>{point}</span>
+                    </li>
+                  ))}
+                </ul>
+              </Card>
+            ))}
+          </div>
+        </Section>
       </section>
 
       <CommandMenu
@@ -276,7 +351,9 @@ function QuickInfo({
 }) {
   return (
     <div className="rounded-2xl border border-black/6 bg-[#faf8f4] p-4">
-      <p className="text-xs uppercase tracking-[0.14em] text-[#8a6840]">{label}</p>
+      <p className="text-xs uppercase tracking-[0.14em] text-[#8a6840]">
+        {label}
+      </p>
       <p className="mt-2 text-lg font-semibold text-[#111827]">{value}</p>
       <p className="mt-1 text-sm leading-6 text-[#6b7280]">{detail}</p>
     </div>
