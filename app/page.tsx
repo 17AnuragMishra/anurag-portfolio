@@ -21,6 +21,15 @@ export const metadata: Metadata = {
 
 const featuredProjects = RESUME_DATA.projects.slice(0, 4);
 const otherProjects = RESUME_DATA.projects.slice(4);
+const githubUsername = RESUME_DATA.personalWebsiteUrl.split("/").filter(Boolean).pop();
+const TECH_STACK_ICONS = [
+  { name: "React", Icon: ReactMark },
+  { name: "Next.js", Icon: NextMark },
+  { name: "TypeScript", Icon: TypeScriptMark },
+  { name: "Node.js", Icon: NodeMark },
+  { name: "MongoDB", Icon: MongoMark },
+  { name: "Tailwind", Icon: TailwindMark },
+] as const;
 
 export default function Page() {
   return (
@@ -78,23 +87,20 @@ export default function Page() {
                   Open to frontend and full-stack roles
                 </span>
               </div>
+
+              <GitHubContributions username={githubUsername ?? "17AnuragMishra"} />
             </div>
 
-            <div className="grid min-w-[260px] gap-3 sm:grid-cols-2 lg:grid-cols-1">
-              <QuickInfo
-                label="Experience"
-                value={`${RESUME_DATA.work.length} roles`}
-                detail="Hands-on product and internship work"
-              />
+            <div className="grid min-w-[260px] gap-3 sm:grid-cols-3 lg:grid-cols-1">
               <QuickInfo
                 label="Projects"
                 value={`${RESUME_DATA.projects.length}+ builds`}
-                detail="Recent work with UI, real-time, and AI products"
+                detail="UI, real-time, and AI products"
               />
               <QuickInfo
                 label="Open Source"
                 value={`${RESUME_DATA.openSource.length} repos`}
-                detail="Merged PRs and active contribution work"
+                detail="Merged PRs and contribution work"
               />
               <QuickInfo
                 label="Stack"
@@ -133,43 +139,7 @@ export default function Page() {
               ))}
             </div>
           </Section>
-
-          <Section className="rounded-[2rem] border border-black/6 bg-white p-6 shadow-[0_18px_50px_rgba(15,23,42,0.05)] md:p-8">
-            <div className="space-y-2">
-              <p className="text-sm font-medium uppercase tracking-[0.16em] text-[#8a6840]">
-                Core Skills
-              </p>
-              <h2 className="text-2xl font-semibold tracking-[-0.03em] text-[#111827]">
-                Tools I use most
-              </h2>
-            </div>
-
-            <div className="flex flex-wrap gap-2 pt-2">
-              {RESUME_DATA.skills.map((skill) => (
-                <Badge
-                  key={skill}
-                  variant="secondary"
-                  className="rounded-full border border-black/8 bg-[#faf8f4] px-3 py-1.5 text-xs text-[#374151]"
-                >
-                  {skill}
-                </Badge>
-              ))}
-            </div>
-
-            <div className="grid gap-3 pt-5">
-              {RESUME_DATA.quickFacts.map((fact) => (
-                <div
-                  key={fact}
-                  className="rounded-2xl border border-black/6 bg-[#faf8f4] px-4 py-3 text-sm leading-6 text-[#4b5563]"
-                >
-                  {fact}
-                </div>
-              ))}
-            </div>
-          </Section>
-        </div>
-
-        <div className="grid gap-6 lg:grid-cols-[1fr_1fr]">
+          
           <Section className="rounded-[2rem] border border-black/6 bg-white p-6 shadow-[0_18px_50px_rgba(15,23,42,0.05)] md:p-8">
             <div className="mb-2 flex items-center gap-3">
               <BriefcaseBusinessIcon className="size-5 text-[#8a6840]" />
@@ -204,6 +174,57 @@ export default function Page() {
                     ))}
                   </ul>
                 </Card>
+              ))}
+            </div>
+          </Section>
+        </div>
+
+        <div className="grid gap-6 lg:grid-cols-[1fr_1fr]">
+          <Section className="rounded-[2rem] border border-black/6 bg-white p-6 shadow-[0_18px_50px_rgba(15,23,42,0.05)] md:p-8">
+            <div className="space-y-2">
+              <p className="text-sm font-medium uppercase tracking-[0.16em] text-[#8a6840]">
+                Core Skills
+              </p>
+              <h2 className="text-2xl font-semibold tracking-[-0.03em] text-[#111827]">
+                Tools I use most
+              </h2>
+            </div>
+
+            <div className="flex flex-wrap gap-2 pt-2">
+              {RESUME_DATA.skills.map((skill) => (
+                <Badge
+                  key={skill}
+                  variant="secondary"
+                  className="rounded-full border border-black/8 bg-[#faf8f4] px-3 py-1.5 text-xs text-[#374151]"
+                >
+                  {skill}
+                </Badge>
+              ))}
+            </div>
+
+            <div className="grid gap-3 pt-5">
+              {RESUME_DATA.quickFacts.map((fact) => (
+                <div
+                  key={fact}
+                  className="rounded-2xl border border-black/6 bg-[#faf8f4] px-4 py-3 text-sm leading-6 text-[#4b5563]"
+                >
+                  {fact}
+                </div>
+              ))}
+            </div>
+
+            <div className="grid grid-cols-3 gap-3 pt-6 sm:grid-cols-4 lg:grid-cols-3">
+              {TECH_STACK_ICONS.map((tech) => (
+                <div
+                  key={tech.name}
+                  className="flex aspect-square flex-col items-center justify-center gap-2 rounded-2xl border border-black/6 bg-[#fcfbf9] p-3 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.75)]"
+                  title={tech.name}
+                >
+                  <tech.Icon className="size-8" />
+                  <span className="text-[11px] font-medium text-[#4b5563]">
+                    {tech.name}
+                  </span>
+                </div>
               ))}
             </div>
           </Section>
@@ -337,6 +358,126 @@ export default function Page() {
         ]}
       />
     </main>
+  );
+}
+
+function GitHubContributions({ username }: { username: string }) {
+  return (
+    <a
+      href={`https://github.com/${username}`}
+      target="_blank"
+      rel="noreferrer"
+      className="block rounded-2xl border border-black/6 bg-[#faf8f4] p-4 hover:border-[#8a6840]/35 hover:shadow-[0_14px_34px_rgba(15,23,42,0.08)]"
+      aria-label={`${username} GitHub contributions`}
+    >
+      <div className="mb-3 flex items-center justify-between gap-3">
+        <div>
+          <p className="text-xs uppercase tracking-[0.14em] text-[#8a6840]">
+            GitHub
+          </p>
+          <p className="mt-1 text-lg font-semibold text-[#111827]">
+            Contributions
+          </p>
+        </div>
+        <ArrowUpRightIcon className="size-4 shrink-0 text-[#8a6840]" />
+      </div>
+
+      <div className="overflow-hidden rounded-xl border border-black/6 bg-white p-2">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={`https://ghchart.rshah.org/8a6840/${username}`}
+          alt={`${username} GitHub contributions graph`}
+          className="h-auto w-full"
+          loading="lazy"
+        />
+      </div>
+    </a>
+  );
+}
+
+function ReactMark({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 48 48" role="img" aria-label="React">
+      <g fill="none" stroke="#5fd3f3" strokeWidth="2.8">
+        <ellipse cx="24" cy="24" rx="18" ry="7" />
+        <ellipse cx="24" cy="24" rx="18" ry="7" transform="rotate(60 24 24)" />
+        <ellipse cx="24" cy="24" rx="18" ry="7" transform="rotate(120 24 24)" />
+      </g>
+      <circle cx="24" cy="24" r="4" fill="#1f9ec7" />
+    </svg>
+  );
+}
+
+function NextMark({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 48 48" role="img" aria-label="Next.js">
+      <circle cx="24" cy="24" r="20" fill="#111827" />
+      <path
+        d="M16 33V15h4.5l11.8 18H28L20 21.2V33h-4Z"
+        fill="#fffdfa"
+      />
+      <path d="M31.2 15h4v18h-4V15Z" fill="#fffdfa" />
+    </svg>
+  );
+}
+
+function TypeScriptMark({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 48 48" role="img" aria-label="TypeScript">
+      <rect width="38" height="38" x="5" y="5" rx="8" fill="#3178c6" />
+      <path
+        d="M14 19.2h14v3.3h-5v12.7h-4V22.5h-5v-3.3Zm16.2 12.5c1 .7 2.3 1.2 3.7 1.2 1.2 0 1.9-.4 1.9-1.2 0-.7-.5-1-2.4-1.7-2.7-1-4.4-2.1-4.4-4.7 0-2.8 2.2-4.6 5.5-4.6 1.8 0 3.3.4 4.5 1.1v3.6c-1.2-.8-2.5-1.3-3.8-1.3-1.1 0-1.8.4-1.8 1.1 0 .7.5 1 2.6 1.8 3 1.1 4.2 2.4 4.2 4.8 0 3-2.2 4.7-5.8 4.7-2 0-3.7-.5-4.9-1.3v-3.5Z"
+        fill="#fffdfa"
+      />
+    </svg>
+  );
+}
+
+function NodeMark({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 48 48" role="img" aria-label="Node.js">
+      <path
+        d="M24 5.5 40.5 15v18L24 42.5 7.5 33V15L24 5.5Z"
+        fill="#6da55f"
+      />
+      <path
+        d="M15 31V17h4l6 8.6V17h4v14h-3.8L19 22.2V31h-4Zm19.6.3c-1.9 0-3.3-.5-4.5-1.3v-3.2c1.2.9 2.6 1.4 4.1 1.4 1.1 0 1.7-.3 1.7-1 0-.6-.4-.9-2-1.4-2.3-.8-3.7-1.8-3.7-4 0-2.4 1.9-4 4.8-4 1.5 0 2.8.3 3.8.9v3.1c-1-.6-2.2-1-3.4-1-1 0-1.5.3-1.5.9s.5.8 2.1 1.4c2.5.9 3.6 2 3.6 4.1 0 2.6-1.9 4.1-5 4.1Z"
+        fill="#fffdfa"
+      />
+    </svg>
+  );
+}
+
+function MongoMark({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 48 48" role="img" aria-label="MongoDB">
+      <path
+        d="M24.5 4.5s11 8.3 11 21.1c0 8-4.5 14.1-11.1 17.9C17.8 39.8 13 33.7 13 25.7 13 12.8 24.5 4.5 24.5 4.5Z"
+        fill="#47a248"
+      />
+      <path
+        d="M24.5 9.6v33.9"
+        stroke="#1f6f3b"
+        strokeLinecap="round"
+        strokeWidth="2"
+      />
+      <path
+        d="M24.5 9.6c2.2 5.2 3.4 10.4 3.4 15.5 0 5.9-1.2 11.5-3.5 16.6"
+        fill="#63c160"
+        opacity="0.75"
+      />
+    </svg>
+  );
+}
+
+function TailwindMark({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 48 48" role="img" aria-label="Tailwind CSS">
+      <path
+        d="M13.5 20.7c2.8-7.4 7.5-11.1 14.1-11.1 4 0 6.8 1.5 8.5 4.5 1 1.8 2.2 2.9 3.5 3.3 1.4.4 3 .1 4.9-.9-2.8 7.4-7.5 11.1-14.1 11.1-4 0-6.8-1.5-8.5-4.5-1-1.8-2.2-2.9-3.5-3.3-1.4-.4-3-.1-4.9.9Zm-10 10.8c2.8-7.4 7.5-11.1 14.1-11.1 4 0 6.8 1.5 8.5 4.5 1 1.8 2.2 2.9 3.5 3.3 1.4.4 3 .1 4.9-.9-2.8 7.4-7.5 11.1-14.1 11.1-4 0-6.8-1.5-8.5-4.5-1-1.8-2.2-2.9-3.5-3.3-1.4-.4-3-.1-4.9.9Z"
+        fill="#38bdf8"
+      />
+    </svg>
   );
 }
 
